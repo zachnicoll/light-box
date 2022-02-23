@@ -16,12 +16,12 @@
 
 /* --- COLOURS --- */
 #define WHITE 0xFFFFFF
-#define COBALT 0x0047ab
+#define COBALT 0x0047AB
 #define HOT_PINK 0xE30022
-#define LIGHT_BLUE 0x2e8b57
-#define LIGHT_RED 0xcd4f39
-#define RED 0xff2800
-#define GREEN 0x228b22
+#define LIGHT_BLUE 0x2E8B57
+#define LIGHT_RED 0xCD4F39
+#define RED 0xFF2800
+#define GREEN 0x228B22
 // #define ANOTHER_COLOUR 0xFFFFFF
 
 // Increase this if more colours are added
@@ -41,7 +41,8 @@ int previous_button_state = HIGH;
 */
 int debounce_count = 0;
 
-void setup() {
+void setup()
+{
   Serial.begin(9600);
 
   // Initialise button
@@ -61,7 +62,8 @@ void setup() {
    Converts an analogueRead() value between 1 and 1024 to
    a NeoPixel brightness value beween 0 and 255.
 */
-int analogueToBrightness(int analogue_value) {
+int analogueToBrightness(int analogue_value)
+{
   float fraction = (float)analogue_value / (float)MAX_ANALOGUE_READ;
   int brightness = fraction * MAX_BRIGHTNESS;
 
@@ -73,21 +75,26 @@ int analogueToBrightness(int analogue_value) {
    analogue value to a scaled brightness, then set the NeoPixels
    to this brightness.
 */
-void adjustBrightness() {
+void adjustBrightness()
+{
   int resistor_read = analogRead(RESISTOR_PIN);
   int threshold;
 
   // The analog read on the potentiometer seems to get more sensistive towards the
   // smaller values. Increasing the threshold for changing brightness at these levels
   // reduces flickering.
-  if (resistor_read < 300) threshold = 15;
-  else if (resistor_read < 150) threshold = 20;
-  else threshold = 5;
-
+  if (resistor_read < 300)
+    threshold = 15;
+  else if (resistor_read < 150)
+    threshold = 20;
+  else
+    threshold = 5;
 
   // Only change brightness if resistor value has changed within a tolerance (1 either side of prevous read)
-  if (resistor_read > previous_resistor_read + threshold || resistor_read < previous_resistor_read - threshold) {
-    if (resistor_read < 20) {
+  if (resistor_read > previous_resistor_read + threshold || resistor_read < previous_resistor_read - threshold)
+  {
+    if (resistor_read < 20)
+    {
       resistor_read = 0;
     }
 
@@ -108,7 +115,8 @@ void adjustBrightness() {
    and cycle to the next colour in the colours array if so. Applies
    this colour to all NeoPixels.
 */
-void checkChangeColour() {
+void checkChangeColour()
+{
   int button_state = digitalRead(BUTTON_PIN);
 
   /**
@@ -118,33 +126,42 @@ void checkChangeColour() {
 
   // Check if button was pressed after it was released, and that its been held down
   // for sufficiently long (debounced)
-  if (button_state == LOW && previous_button_state == HIGH && debounce_count > 100) {
+  if (button_state == LOW && previous_button_state == HIGH && debounce_count > 100)
+  {
     previous_button_state = LOW;
     debounce_count = 0;
 
     // Select the next colour, wrap around if we reached the end of the array
-    if (current_colour_index < (NUM_COLOURS - 1)) {
+    if (current_colour_index < (NUM_COLOURS - 1))
+    {
       current_colour_index++;
-    } else {
+    }
+    else
+    {
       current_colour_index = 0;
     }
 
     uint32_t colour = colours[current_colour_index];
-    
+
     // Set pixels to new colour
     pixels.fill(colour, 0, NUM_PIXELS - 1);
     pixels.show();
-  } else if (button_state == LOW) {
+  }
+  else if (button_state == LOW)
+  {
     // Button is being held down, increase debounce count
     debounce_count++;
-  } else if (button_state == HIGH) {
+  }
+  else if (button_state == HIGH)
+  {
     // Set previous state to low if button is not pressed, so we can register another press
     previous_button_state = HIGH;
     debounce_count = 0;
   }
 }
 
-void loop() {
+void loop()
+{
   // Adjust brightness via potentiometer
   adjustBrightness();
 
