@@ -1,6 +1,6 @@
 # 3D Printing Models
 
-Use these models in 3D printing software in print and construct the Light Box!
+Use these models in 3D printing software to print and construct the Light Box!
 Alternatively, open them in your favourite CAD software (like Fusion 360) to edit them.
 
 ### Assembly
