@@ -17,11 +17,11 @@ To program the Arduino Nano, the Arduino IDE needs to be downloaded from [here](
 
 ### Parts List
 
-- Arduino Nano
-- NeoPixel Ring (24 pixels)
-- Push Button
-- Potentiometer
-- 4 Screws and Nuts (M4)
+- 1x Arduino Nano
+- 1x NeoPixel Ring 24
+- 1x Push Button
+- 1x Potentiometer
+- 4x M4 Screws and Nuts 
 
 ### 3D Printing
 
