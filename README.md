@@ -1,5 +1,7 @@
 # Light Box
 
+<img src="content/lightbox.jpeg" alt="Assembled Light Box, from the back" width="300">
+
 _Happy Birthday Cass!_
 
 This repo contains the code and files required for programming and 3D-printing a "light box". The lamp operates from an Arudino Nano and utlises the Adafruit NeoPixel library to control a NeoPixel ring. A button is used to change the colour of the ring, while a potentiometer is used to change the brightness.
